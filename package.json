@@ -1,0 +1,23 @@
+{
+  "name": "calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "debug": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apicache": "^1.6.3",
+    "cal-parser": "^1.0.1",
+    "express": "^4.17.3",
+    "ics-parse": "^0.0.3",
+    "jcalendar-parser": "^1.0.0",
+    "memory-cache": "^0.2.0",
+    "pretty-jcal": "^1.0.1",
+    "vdata-parser": "^0.1.5"
+  }
+}

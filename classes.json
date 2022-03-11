@@ -1,0 +1,522 @@
+[
+    {
+        "code": "3337",
+        "classe": "1A"
+    },
+    {
+        "code": "5955",
+        "classe": "1A-TD1"
+    },
+    {
+        "code": "5957",
+        "classe": "1A-TP1"
+    },
+    {
+        "code": "5956",
+        "classe": "1A-TP2"
+    },
+    {
+        "code": "5940",
+        "classe": "1A-TD2"
+    },
+    {
+        "code": "5941",
+        "classe": "1A-TP3"
+    },
+    {
+        "code": "5953",
+        "classe": "1A-TP4"
+    },
+    {
+        "code": "15897",
+        "classe": "2A"
+    },
+    {
+        "code": "15901",
+        "classe": "2A-TD1"
+    },
+    {
+        "code": "17006",
+        "classe": "2A-TP1"
+    },
+    {
+        "code": "15933",
+        "classe": "2A-TP2"
+    },
+    {
+        "code": "17007",
+        "classe": "2A-TD2"
+    },
+    {
+        "code": "17009",
+        "classe": "2A-TP3"
+    },
+    {
+        "code": "17008",
+        "classe": "2A-TP4"
+    },
+    {
+        "code": "5986",
+        "classe": "3A"
+    },
+    {
+        "code": "6018",
+        "classe": "3A-S1"
+    },
+    {
+        "code": "6037",
+        "classe": "3A-S1-TD1"
+    },
+    {
+        "code": "6042",
+        "classe": "3A-S1-TP1"
+    },
+    {
+        "code": "6044",
+        "classe": "3A-S1-TP1A"
+    },
+    {
+        "code": "6043",
+        "classe": "3A-S1-TP1B"
+    },
+    {
+        "code": "6045",
+        "classe": "3A-S1-TP1C"
+    },
+    {
+        "code": "6038",
+        "classe": "3A-S1-TP2"
+    },
+    {
+        "code": "6039",
+        "classe": "3A-S1-TP2A"
+    },
+    {
+        "code": "6040",
+        "classe": "3A-S1-TP2B"
+    },
+    {
+        "code": "6041",
+        "classe": "3A-S1-TP2C"
+    },
+    {
+        "code": "6019",
+        "classe": "3A-S1-TD2"
+    },
+    {
+        "code": "6024",
+        "classe": "3A-S1-TP3"
+    },
+    {
+        "code": "6027",
+        "classe": "3A-S1-TP3A"
+    },
+    {
+        "code": "6025",
+        "classe": "3A-S1-TP3B"
+    },
+    {
+        "code": "6026",
+        "classe": "3A-S1-TP3C"
+    },
+    {
+        "code": "6020",
+        "classe": "3A-S1-TP4"
+    },
+    {
+        "code": "6023",
+        "classe": "3A-S1-TP4A"
+    },
+    {
+        "code": "6022",
+        "classe": "3A-S1-TP4B"
+    },
+    {
+        "code": "6021",
+        "classe": "3A-S1-TP4C"
+    },
+    {
+        "code": "6028",
+        "classe": "3A-S1-TD3"
+    },
+    {
+        "code": "6033",
+        "classe": "3A-S1-TP5"
+    },
+    {
+        "code": "6035",
+        "classe": "3A-S1-TP5A"
+    },
+    {
+        "code": "6036",
+        "classe": "3A-S1-TP5B"
+    },
+    {
+        "code": "6034",
+        "classe": "3A-S1-TP5C"
+    },
+    {
+        "code": "6029",
+        "classe": "3A-S1-TP6"
+    },
+    {
+        "code": "6032",
+        "classe": "3A-S1-TP6A"
+    },
+    {
+        "code": "6030",
+        "classe": "3A-S1-TP6B"
+    },
+    {
+        "code": "6031",
+        "classe": "3A-S1-TP6C"
+    },
+    {
+        "code": "5987",
+        "classe": "3A-S2"
+    },
+    {
+        "code": "5988",
+        "classe": "3A-S2-EIS"
+    },
+    {
+        "code": "6003",
+        "classe": "3A-S2-TD1"
+    },
+    {
+        "code": "6009",
+        "classe": "3A-S2-TP1"
+    },
+    {
+        "code": "6010",
+        "classe": "3A-S2-TP1A"
+    },
+    {
+        "code": "6012",
+        "classe": "3A-S2-TP1B"
+    },
+    {
+        "code": "6011",
+        "classe": "3A-S2-TP1C"
+    },
+    {
+        "code": "6004",
+        "classe": "3A-S2-TP2"
+    },
+    {
+        "code": "6008",
+        "classe": "3A-S2-TP2A"
+    },
+    {
+        "code": "6006",
+        "classe": "3A-S2-TP2B"
+    },
+    {
+        "code": "6005",
+        "classe": "3A-S2-TP2C"
+    },
+    {
+        "code": "5994",
+        "classe": "3A-S2-TD2"
+    },
+    {
+        "code": "5999",
+        "classe": "3A-S2-TP3"
+    },
+    {
+        "code": "6001",
+        "classe": "3A-S2-TP3A"
+    },
+    {
+        "code": "6000",
+        "classe": "3A-S2-TP3B"
+    },
+    {
+        "code": "6002",
+        "classe": "3A-S2-TP3C"
+    },
+    {
+        "code": "5995",
+        "classe": "3A-S2-TP4"
+    },
+    {
+        "code": "5997",
+        "classe": "3A-S2-TP4A"
+    },
+    {
+        "code": "5996",
+        "classe": "3A-S2-TP4B"
+    },
+    {
+        "code": "5998",
+        "classe": "3A-S2-TP4C"
+    },
+    {
+        "code": "6013",
+        "classe": "3A-S2-IR&C"
+    },
+    {
+        "code": "6014",
+        "classe": "3A-S2-TD3"
+    },
+    {
+        "code": "6015",
+        "classe": "3A-S2-TP5"
+    },
+    {
+        "code": "6016",
+        "classe": "3A-S2-TD4"
+    },
+    {
+        "code": "6017",
+        "classe": "3A-S2-TP6"
+    },
+    {
+        "code": "6113",
+        "classe": "3APP"
+    },
+    {
+        "code": "6114",
+        "classe": "3APP-TP1"
+    },
+    {
+        "code": "6115",
+        "classe": "3APP-TP2"
+    },
+    {
+        "code": "6046",
+        "classe": "4A"
+    },
+    {
+        "code": "6065",
+        "classe": "4A-PI"
+    },
+    {
+        "code": "6080",
+        "classe": "4A-PRJ01"
+    },
+    {
+        "code": "6074",
+        "classe": "4A-PRJ02"
+    },
+    {
+        "code": "6072",
+        "classe": "4A-PRJ03"
+    },
+    {
+        "code": "6085",
+        "classe": "4A-PRJ04"
+    },
+    {
+        "code": "6083",
+        "classe": "4A-PRJ05"
+    },
+    {
+        "code": "6078",
+        "classe": "4A-PRJ06"
+    },
+    {
+        "code": "6076",
+        "classe": "4A-PRJ07"
+    },
+    {
+        "code": "6088",
+        "classe": "4A-PRJ08"
+    },
+    {
+        "code": "6087",
+        "classe": "4A-PRJ09"
+    },
+    {
+        "code": "6089",
+        "classe": "4A-PRJ10"
+    },
+    {
+        "code": "6096",
+        "classe": "4A-PRJ11"
+    },
+    {
+        "code": "6095",
+        "classe": "4A-PRJ12"
+    },
+    {
+        "code": "6091",
+        "classe": "4A-PRJ13"
+    },
+    {
+        "code": "6090",
+        "classe": "4A-PRJ14"
+    },
+    {
+        "code": "6068",
+        "classe": "4A-PRJ15"
+    },
+    {
+        "code": "6067",
+        "classe": "4A-PRJ16"
+    },
+    {
+        "code": "6094",
+        "classe": "4A-PRJ17"
+    },
+    {
+        "code": "6093",
+        "classe": "4A-PRJ18"
+    },
+    {
+        "code": "6069",
+        "classe": "4A-PRJ19"
+    },
+    {
+        "code": "6071",
+        "classe": "4A-PRJ20"
+    },
+    {
+        "code": "6070",
+        "classe": "4A-PRJ21"
+    },
+    {
+        "code": "6082",
+        "classe": "4A-PRJ22"
+    },
+    {
+        "code": "6081",
+        "classe": "4A-PRJ23"
+    },
+    {
+        "code": "6075",
+        "classe": "4A-PRJ24"
+    },
+    {
+        "code": "6073",
+        "classe": "4A-PRJ25"
+    },
+    {
+        "code": "6086",
+        "classe": "4A-PRJ26"
+    },
+    {
+        "code": "6047",
+        "classe": "4A-STD"
+    },
+    {
+        "code": "6056",
+        "classe": "4A-EIS"
+    },
+    {
+        "code": "6057",
+        "classe": "4A-EIS-TD1"
+    },
+    {
+        "code": "6061",
+        "classe": "4A-EIS-TD2"
+    },
+    {
+        "code": "6048",
+        "classe": "4A-IR&C"
+    },
+    {
+        "code": "6049",
+        "classe": "4A-IR&C-TD3"
+    },
+    {
+        "code": "6052",
+        "classe": "4A-IR&C-TD4"
+    },
+    {
+        "code": "6116",
+        "classe": "4APP"
+    },
+    {
+        "code": "6124",
+        "classe": "4APP-TP1"
+    },
+    {
+        "code": "6125",
+        "classe": "4APP-MI1A"
+    },
+    {
+        "code": "6126",
+        "classe": "4APP-MI1B"
+    },
+    {
+        "code": "14737",
+        "classe": "4APP-TP2"
+    },
+    {
+        "code": "14740",
+        "classe": "4APP-MI2A"
+    },
+    {
+        "code": "14739",
+        "classe": "4APP-MI2B"
+    },
+    {
+        "code": "5958",
+        "classe": "5A-EIS"
+    },
+    {
+        "code": "5959",
+        "classe": "5A-EIS-G1"
+    },
+    {
+        "code": "5962",
+        "classe": "5A-EIS-G1-TP1"
+    },
+    {
+        "code": "5961",
+        "classe": "5A-EIS-G1-TP2"
+    },
+    {
+        "code": "5963",
+        "classe": "5A-EIS-G2"
+    },
+    {
+        "code": "5965",
+        "classe": "5A-EIS-G2-TP1"
+    },
+    {
+        "code": "5964",
+        "classe": "5A-EIS-G2-TP2"
+    },
+    {
+        "code": "5966",
+        "classe": "5A-EIS-G3"
+    },
+    {
+        "code": "5968",
+        "classe": "5A-EIS-G3-TP1"
+    },
+    {
+        "code": "5967",
+        "classe": "5A-EIS-G3-TP2"
+    },
+    {
+        "code": "5969",
+        "classe": "5A-IR&C"
+    },
+    {
+        "code": "5978",
+        "classe": "5A-IR&C-TP1"
+    },
+    {
+        "code": "5975",
+        "classe": "5A-IR&C-TP2"
+    },
+    {
+        "code": "5979",
+        "classe": "5A-MISTRE"
+    },
+    {
+        "code": "14743",
+        "classe": "5APP"
+    },
+    {
+        "code": "14744",
+        "classe": "5APP-TP1"
+    },
+    {
+        "code": "14747",
+        "classe": "5APP-TP2"
+    }
+]
