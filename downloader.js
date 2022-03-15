@@ -115,18 +115,19 @@ const downloader = (code, res,blu=true) => {
                             console.log("r=>",r);
                             const start=new Date(mindate).setHours(r[0][0],r[0][1]);
                             const end=new Date(mindate).setHours(r[1][0],r[1][1]);
-                            let salles=[];
+                            let salles_prises=[];
                             data_to_send.forEach(e=>{
                                 if(e.location && !salles.includes(e.location) && e.start>=start&&e.end<=end ){
-                                    salles.push(e.location);
+                                    salles_prises.push(e.location);
                                 }
                             })
-                            if(salles.length>0){
+                            if(salles_prises.length-salles.length!=0){
+                                const salles_non_prises=salles.filter(e=>!salles_prises.includes(e));
                                 result.push({
                                     id: Math.random().toString(36).substring(7),
                                     start: start,
                                     end: end,
-                                    summary: salles.join(" "),
+                                    summary: salles_non_prises.join(" "),
                                     location: null,
                                     description: null,
                                     raw: null
