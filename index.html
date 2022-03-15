@@ -66,11 +66,11 @@
         eventContent: function (arg) {
             const event = arg.event;
             let customHtml = "";
-            if(event.extendedProps.type || event.extendedProps.summary)customHtml += `<b>${event.extendedProps.type} ${event.extendedProps.summary}</b><br>`;
-            if(event.extendedProps.location)customHtml += `<b style="color:#dbdbdb">${event.extendedProps.location}</b><br>`;
-            customHtml += event.extendedProps.teacher?event.extendedProps.teacher:'';
-            customHtml.replace(/\n/g,"<br>")
-            return { html: customHtml }
+            if(event.extendedProps.type || event.extendedProps.summary){customHtml += `<b>${event.extendedProps.type?event.extendedProps.type:''} ${event.extendedProps.summary?event.extendedProps.summary:''}</b><br>`};
+            if(event.extendedProps.location){customHtml += `<b style="color:#dbdbdb">${event.extendedProps.location}</b><br>`};
+            if(event.extendedProps.teacher){customHtml += event.extendedProps.teacher};
+            // customHtml.replace(/\n/g,"<br>")
+            return { html: customHtml.replace(/\n/g,"<br>") }
         }
     });
     calendar.render();

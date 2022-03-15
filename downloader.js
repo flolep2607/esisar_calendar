@@ -106,70 +106,102 @@ const downloader = (code, res,blu=true) => {
                             console.log("u", e);
                             console.log("!!", event);
                         }
-                    })
-                    result=[];
-                    let tmp=[]
-                    console.log([mindate,maxdate]);
-                    salles.forEach(salle=>{
-                        let horraires=[[mindate,maxdate]];
-                        for(data_elem of data_to_send){
-                            if(!data_elem.location || !data_elem.location.includes(salle)){continue}
-                            for(id in horraires){
-                                // console.log(id)
-                                if(horraires[id][0]<=data_elem.start && data_elem.start<=horraires[id][1]){
-                                    //console.log("UWU",horraires);
-                                    const min=horraires[id][0];
-                                    const max=horraires[id][1];
-                                    horraires[id]=[min,data_elem.start];
-                                    horraires.splice(id+1, 0, [data_elem.end,max]);
-                                    //console.log(salle,horraires[id][0],data_elem.start,horraires[id][1],horraires)
+                    });
+                    mindate=new Date(mindate);
+                    maxdate=new Date(maxdate);
+                    let result=[];
+                    for (var d = mindate; d <= maxdate; d.setDate(d.getDate() + 1)) {
+                        [[[8,15],[9,45]],[[10,00],[11,30]],[[13,00],[14,30]],[[14,45],[16,15]],[[16,30],[18,00]],[[18,15],[19,45]]].forEach(r=>{
+                            console.log("r=>",r);
+                            const start=new Date(mindate).setHours(r[0][0],r[0][1]);
+                            const end=new Date(mindate).setHours(r[1][0],r[1][1]);
+                            let salles=[];
+                            data_to_send.forEach(e=>{
+                                if(e.location && !salles.includes(e.location) && e.start>=start&&e.end<=end ){
+                                    salles.push(e.location);
                                 }
-                            }
-                        }
-                        horraires.forEach(r=>{
-                            console.log(addMinutes(r[0],20),r[1])
-                            let previous=r[0];let next=r[1];
-                            if(previous.getHours()<8){previous.setHours(8,0,0)}
-                            if(next.getHours()>18){next.setHours(18,0,0)}
-                            if(previous.toDateString()!==next.toDateString()){
-                                if(addMinutes(previous,20)<new Date(previous.getFullYear(),previous.getMonth(),previous.getDay(),18)){
-                                    tmp.push({
-                                        start: previous,
-                                        end: new Date(previous.getFullYear(),previous.getMonth(),previous.getDay(),18),
-                                        location: salle,
-                                        title: salle
-                                    })
-                                }
-                                if(addMinutes(new Date(next.getFullYear(),next.getMonth(),next,8),20)<next){
-                                    tmp.push({
-                                        start: new Date(next.getFullYear(),next.getMonth(),next,8),
-                                        end: next,
-                                        location: salle,
-                                        title: salle
-                                    })
-                                }
-                                currentDate=new Date(previous.getFullYear(),previous.getMonth(),previous.getDay()+1,18);
-                                while (currentDate < next) {
-                                    tmp.push({
-                                        start: new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDay(),8),
-                                        end: currentDate,
-                                        location: salle,
-                                        title: salle
-                                    })
-                                    currentDate = currentDate.addDays(1);
-                                }
-                            }else{
-                                if(addMinutes(previous,20)>=next){return}
-                                tmp.push({
-                                    start: previous,
-                                    end: next,
-                                    location: salle,
-                                    title: salle
+                            })
+                            if(salles.length>0){
+                                result.push({
+                                    id: Math.random().toString(36).substring(7),
+                                    start: start,
+                                    end: end,
+                                    summary: salles.join(" "),
+                                    location: null,
+                                    description: null,
+                                    raw: null
                                 })
                             }
                         })
-                    })
-                    data_to_send=tmp;
+                    }
+                    data_to_send=result;
+
+
+
+
+                    // result=[];
+                    // let tmp=[]
+                    // console.log([mindate,maxdate]);
+                    // salles.forEach(salle=>{
+                    //     let horraires=[[mindate,maxdate]];
+                    //     for(data_elem of data_to_send){
+                    //         if(!data_elem.location || !data_elem.location.includes(salle)){continue}
+                    //         for(id in horraires){
+                    //             // console.log(id)
+                    //             if(horraires[id][0]<=data_elem.start && data_elem.start<=horraires[id][1]){
+                    //                 //console.log("UWU",horraires);
+                    //                 const min=horraires[id][0];
+                    //                 const max=horraires[id][1];
+                    //                 horraires[id]=[min,data_elem.start];
+                    //                 horraires.splice(id+1, 0, [data_elem.end,max]);
+                    //                 //console.log(salle,horraires[id][0],data_elem.start,horraires[id][1],horraires)
+                    //             }
+                    //         }
+                    //     }
+                    //     horraires.forEach(r=>{
+                    //         console.log(addMinutes(r[0],20),r[1])
+                    //         let previous=r[0];let next=r[1];
+                    //         if(previous.getHours()<8){previous.setHours(8,0,0)}
+                    //         if(next.getHours()>18){next.setHours(18,0,0)}
+                    //         if(previous.toDateString()!==next.toDateString()){
+                    //             if(addMinutes(previous,20)<new Date(previous.getFullYear(),previous.getMonth(),previous.getDay(),18)){
+                    //                 tmp.push({
+                    //                     start: previous,
+                    //                     end: new Date(previous.getFullYear(),previous.getMonth(),previous.getDay(),18),
+                    //                     location: salle,
+                    //                     title: salle
+                    //                 })
+                    //             }
+                    //             if(addMinutes(new Date(next.getFullYear(),next.getMonth(),next,8),20)<next){
+                    //                 tmp.push({
+                    //                     start: new Date(next.getFullYear(),next.getMonth(),next,8),
+                    //                     end: next,
+                    //                     location: salle,
+                    //                     title: salle
+                    //                 })
+                    //             }
+                    //             currentDate=new Date(previous.getFullYear(),previous.getMonth(),previous.getDay()+1,18);
+                    //             while (currentDate < next) {
+                    //                 tmp.push({
+                    //                     start: new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDay(),8),
+                    //                     end: currentDate,
+                    //                     location: salle,
+                    //                     title: salle
+                    //                 })
+                    //                 currentDate = currentDate.addDays(1);
+                    //             }
+                    //         }else{
+                    //             if(addMinutes(previous,20)>=next){return}
+                    //             tmp.push({
+                    //                 start: previous,
+                    //                 end: next,
+                    //                 location: salle,
+                    //                 title: salle
+                    //             })
+                    //         }
+                    //     })
+                    // })
+                    // data_to_send=tmp;
                 }
                 //salles=[...new Set(data_to_send.filter(r=>r.type && (r.type.includes("TD") || r.type.includes("CM"))).map(r=>r.location).filter(t=>t!==null))]
                 //console.log(salles);
