@@ -14,6 +14,9 @@ const regex_classe = /([1-5])A/im;
 const regex_finder = /(?<year1>[1-5]A)M(?<matiere>[A-Z]+[0-9]+)_[0-9]{4}_S[0-9]+_(?<type1>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)_G(?<groupe1>[1-9]) (?<teacher1>[^\(\*]*)|(?<year2>[1-5]APP)-(?<type2>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)(?<groupe2>[1-9]+)(?<teacher2>[^\(\*]*)|(?<year3>[1-5]A)/i;
 const base64token = Buffer.from(`${process.env.EDT_USER}:${process.env.EDT_PASSWORD}`).toString('base64');
 console.log(`${process.env.EDT_USER}:${process.env.EDT_PASSWORD}`);
+const currentTime = new Date();
+let YEAR_now=currentTime.getFullYear();
+if(currentTime.getMonth()<7){YEAR_now=YEAR_now-1;}
 const salles = [
     'A048', 
     'B040',
@@ -37,7 +40,7 @@ const downloader = (code, res,blu=true) => {
     let data_cached = cache.get(code);
     console.log(code);
     if (!data_cached) {
-        fetch(`https://edt.grenoble-inp.fr/directCal/2021-2022/esisar/etudiant/jsp/custom/modules/plannings/direct_cal.jsp?resources=${code}`,
+        fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}/etudiant/esisar?resources=${code}&startDay=31&startMonth=08&startYear=${YEAR_now-1}&endDay=10&endMonth=01&endYear=${YEAR_now+3}`,
             {
                 "headers": {
                     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -115,14 +118,15 @@ const downloader = (code, res,blu=true) => {
                             console.log("r=>",r);
                             const start=new Date(mindate).setHours(r[0][0],r[0][1]);
                             const end=new Date(mindate).setHours(r[1][0],r[1][1]);
-                            let salles_prises=[];
+                            let salles_non_prises=salles.map(r=>r.toUpperCase());
                             data_to_send.forEach(e=>{
-                                if(e.location && !salles.includes(e.location) && e.start>=start&&e.end<=end ){
-                                    salles_prises.push(e.location);
+                                if(e.location && salles_non_prises.includes(e.location) && (e.start>=start&&e.start<=end || e.end>=start&&e.end<=end) ){
+                                    salles_non_prises.filter(m => m != e.location.toUpperCase());
+                                    // salles_prises.push(e.location.toLowerCase());
                                 }
                             })
-                            if(salles_prises.length-salles.length!=0){
-                                const salles_non_prises=salles.filter(e=>!salles_prises.includes(e));
+                            if(salles_non_prises.length>0){
+                                // const salles_non_prises=salles.filter(e=>!salles_prises.includes(e.toLowerCase()));
                                 result.push({
                                     id: Math.random().toString(36).substring(7),
                                     start: start,
