@@ -13,10 +13,11 @@ const regex_summary = /([A-Z]+[0-9]+)/im;
 const regex_classe = /([1-5])A/im;
 const regex_finder = /(?<year1>[1-5]A)M(?<matiere>[A-Z]+[0-9]+)_[0-9]{4}_S[0-9]+_(?<type1>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)_G(?<groupe1>[1-9]) (?<teacher1>[^\(\*]*)|(?<year2>[1-5]APP)-(?<type2>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)(?<groupe2>[1-9]+)(?<teacher2>[^\(\*]*)|(?<year3>[1-5]A)/i;
 const base64token = Buffer.from(`${process.env.EDT_USER}:${process.env.EDT_PASSWORD}`).toString('base64');
-console.log(`${process.env.EDT_USER}:${process.env.EDT_PASSWORD}`);
-const currentTime = new Date();
-let YEAR_now=currentTime.getFullYear();
-if(currentTime.getMonth()<7){YEAR_now=YEAR_now-1;}
+if(!process.env.EDT_USER || !process.env.EDT_PASSWORD){
+    console.log("PAS D'IDENTIFIANTS");
+    process.exit();
+}
+// console.log(`${process.env.EDT_USER}:${process.env.EDT_PASSWORD}`);
 const salles = [
     'A048', 
     'B040',
@@ -37,6 +38,9 @@ const addMinutes=(date, minutes)=> {
     return new Date(date.getTime() + minutes*60000);
 }
 const downloader = (code, res,blu=true) => {
+    const currentTime = new Date();
+    let YEAR_now=currentTime.getFullYear();
+    if(currentTime.getMonth()<7){YEAR_now=YEAR_now-1;}
     let data_cached = cache.get(code);
     console.log(code);
     if (!data_cached) {
@@ -217,9 +221,37 @@ const downloader = (code, res,blu=true) => {
             res.json(data_cached);
         }
 }
+const downloaderics=(code,res)=>{
+    const currentTime = new Date();
+    let YEAR_now=currentTime.getFullYear();
+    if(currentTime.getMonth()<7){YEAR_now=YEAR_now-1;}
+    fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}/etudiant/esisar?resources=${code}&startDay=31&startMonth=08&startYear=${YEAR_now-1}&endDay=10&endMonth=01&endYear=${YEAR_now+3}`,
+            {
+                "headers": {
+                    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                    "accept-language": "fr,fr-FR;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+                    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Microsoft Edge\";v=\"98\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"Windows\"",
+                    "sec-fetch-dest": "document",
+                    "authorization": `Basic ${base64token}`, //user:password en base64
+                    "sec-fetch-mode": "navigate",
+                    "sec-fetch-site": "none",
+                    "sec-fetch-user": "?1",
+                    "upgrade-insecure-requests": "1"
+                },
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "body": null,
+                "method": "GET"
+            }).then(r=>{
+                r.headers.forEach((v, n) => res.setHeader(n, v));
+                r.body.pipe(res)
+            });
+}
 
 module.exports = {
-    downloader
+    downloader,
+    downloaderics
 }
 
 

@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales-all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
     <style>
         html,
         body {
@@ -25,7 +26,10 @@
 </head>
 
 <body>
-    <select id="class-select" onchange="refresh()">
+    <select id="class-select" onchange="refresh()"></select>
+    <a href="" id="ics-link">ICS link</a>
+    <div onclick="qrcodegen()">show QRcode</div> <div id="qrcode"></div>
+    
     </select>
     <div id='calendar'></div>
 </body>
@@ -89,7 +93,19 @@
         });
     const refresh = _=>{
         CLASS_CODE=document.querySelector("#class-select").value;
+        document.querySelector("#ics-link").href=`/api/ics/${CLASS_CODE}`
         calendar.refetchEvents()
+    }
+    const qrcodegen=_=>{
+        document.getElementById('qrcode').innerHTML="";
+        const qrcode = new QRCode(document.getElementById('qrcode'), {
+            text: 'https://stream.flolep.fr'+document.querySelector("#ics-link").href,
+            width: 128,
+            height: 128,
+            colorDark : '#000',
+            colorLight : '#fff',
+            correctLevel : QRCode.CorrectLevel.H
+        });
     }
 </script>
 

@@ -3,14 +3,17 @@ const app = express();
 const fs = require("fs");
 const api = express.Router();
 const apicache = require("apicache");
-const { downloader } = require("./downloader.js");
+const { 
+    downloaderics,
+    downloader 
+} = require("./downloader.js");
 let cache = apicache.middleware
 
 
 app.get('/', (req, res) => {
     res.sendFile("index.html", { root: __dirname });
 });
-api.get("/ics/:code",cache(5*60*1000), (req, res) => { // cache 5 minutes
+api.get("/ics/:code", (req, res) => { // cache 5 minutes cache(5*60*1000)
     downloaderics(req.params.code,res);
 })
 api.get("/json/:code", (req, res) => { // cache 5 minutes
