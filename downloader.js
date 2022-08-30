@@ -428,7 +428,11 @@ const downloaderics=(code,res)=>{
                 "body": null,
                 "method": "GET"
             }).then(r=>{
-                r.headers.forEach((v, n) => res.setHeader(n, v));
+                r.headers.forEach((v, n) => {
+                    if(!n.includes('cookie')){
+                        res.setHeader(n, v)
+                    }
+                });
                 r.body.pipe(res)
             });
 }
