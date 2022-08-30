@@ -408,8 +408,8 @@ const downloaderics=(code,res)=>{
     const currentTime = new Date();
     let YEAR_now=currentTime.getFullYear();
     if(currentTime.getMonth()<7){YEAR_now=YEAR_now-1;}
-    fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}//etudiant/esisar?resources=${code}`,
-    // fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}/etudiant/esisar?resources=${code}&startDay=31&startMonth=08&startYear=${YEAR_now-1}&endDay=10&endMonth=01&endYear=${YEAR_now+3}`,
+    //fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}//etudiant/esisar?resources=${code}`,
+    fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}/etudiant/esisar?resources=${code}&startDay=31&startMonth=08&startYear=${YEAR_now-1}&endDay=10&endMonth=01&endYear=${YEAR_now+3}`,
             {
                 "headers": {
                     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -433,6 +433,8 @@ const downloaderics=(code,res)=>{
                         res.setHeader(n, v)
                     }
                 });
+                res.setHeader('Content-Type','application/octet-stream')
+                res.setHeader('accept-ranges','bytes')
                 r.body.pipe(res)
             });
 }
