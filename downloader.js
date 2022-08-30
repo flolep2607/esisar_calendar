@@ -433,8 +433,6 @@ const downloaderics=(code,res)=>{
                         res.setHeader(n, v)
                     }
                 });
-                res.setHeader('Content-Type','application/octet-stream')
-                res.setHeader('accept-ranges','bytes')
                 r.body.pipe(res)
             });
 }

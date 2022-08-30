@@ -100,9 +100,9 @@
         calendar.refetchEvents()
     }
     const qrcodegen=_=>{
+        document.getElementById('qrcode').innerHTML="";
         if(showqr){
             const CLASS_CODE=document.querySelector("#class-select").value;
-            document.getElementById('qrcode').innerHTML="";
             const qrcode = new QRCode(document.getElementById('qrcode'), {
                 text: `https://edt.flolep.fr/api/ics/${CLASS_CODE}.ics`,
                 width: 128,
