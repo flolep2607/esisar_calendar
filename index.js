@@ -12,8 +12,18 @@ let cache = apicache.options({
 }).middleware
 
 const SALLES = "9756,2432,2101,2895,2336,1814,1660,2706,2295,3098,3096,9757,15186,1796,1797,2543";
+const isThisLocalhost = function (req){
+    switch(req.connection.remoteAddress){
+        case "127.0.0.1":
+        case "::ffff:127.0.0.1":
+        case "::1":
+            return true;
+        default:
+            return req.get('host').indexOf("localhost");
+    }
+}
 app.use((req, res, next) => {
-    if (req.headers.host.indexOf('localhost') < 0 && (req.headers['x-forwarded-proto'] || '').toLowerCase() !== 'https') {
+    if (isThisLocalhost(req) && !request.secure) {
         res.redirect('https://' + req.headers.host + req.url);
     } else {
         next();
