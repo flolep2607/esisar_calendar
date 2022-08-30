@@ -104,7 +104,7 @@
             const CLASS_CODE=document.querySelector("#class-select").value;
             document.getElementById('qrcode').innerHTML="";
             const qrcode = new QRCode(document.getElementById('qrcode'), {
-                text: `https://stream.flolep.fr/api/ics/${CLASS_CODE}`,
+                text: `https://stream.flolep.fr/api/ics/${CLASS_CODE}.ics`,
                 width: 128,
                 height: 128,
                 colorDark : '#000',
