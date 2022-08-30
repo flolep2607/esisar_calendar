@@ -12,7 +12,8 @@ const { resourceLimits } = require("worker_threads");
 const regex_location = /([ABCD][0-9]+)/im;
 const regex_summary = /([A-Z]+[0-9]+)/im;
 const regex_classe = /([1-5])A/im;
-const regex_finder = /(?<year1>[1-5]A)M(?<matiere>[A-Z]+[0-9]+)_[0-9]{4}_S[0-9]+_(?<type1>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)_G(?<groupe1>[1-9]) (?<teacher1>[^\(\*]*)|(?<year2>[1-5]APP)-(?<type2>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)(?<groupe2>[1-9]+)(?<teacher2>[^\(\*]*)|(?<year3>[1-5]A)/i;
+const regex_matiere_spec = /([A-Z]{2}[0-9]{3})$/im;
+const regex_finder = /(?:[0-9\-\ A-Z]*?)(?<year1>[1-5]A)M(?<matiere>[A-Z]+[0-9]+)_[0-9]{4}_S[0-9]+_(?<type1>CM|TD|TDM|TP|SOUTIEN IUT|SOUTIEN CPGE|SOUTIEN|PROJET|TP-MINIGROUPE|HA)_G(?<groupe1>[1-9]) (?<teacher1>[^\(\*]*)|(?<year2>[1-5]APP)-(?<type2>CM|TD|TDM|TP|SOUTIEN|PROJET|TP-MINIGROUPE|HA)(?<groupe2>[1-9]+)(?<teacher2>[^\(\*]*)|(?<year3>[1-5]A)/i;
 const base64token = Buffer.from(`${process.env.EDT_USER}:${process.env.EDT_PASSWORD}`).toString('base64');
 if(!process.env.EDT_USER || !process.env.EDT_PASSWORD){
     console.log("PAS D'IDENTIFIANTS");
@@ -51,11 +52,32 @@ const make_data_modifs=(r,cache,res,blu,code,send=true)=>{
                     const teacher = parsed.groups.teacher1 || parsed.groups.teacher2;
                     const type = parsed.groups.type1 || parsed.groups.type2;
                     const groupe = parsed.groups.groupe1 || parsed.groups.groupe2;
+                    if(!parsed.groups.matiere && regex_matiere_spec.exec(event.summary.value)){
+                        parsed.groups.matiere=regex_matiere_spec.exec(event.summary.value)[0]
+                    }
+                    if(!parsed.groups.matiere){
+                    // if(!regex_location.exec(event.description.value)){
+                        console.log(event)
+                        console.log({
+                            id: event.uid.value,
+                            start: event.dtstart.value,
+                            end: event.dtend.value,
+                            summary: regex_summary.exec(event.summary.value) ? regex_summary.exec(event.summary.value)[0] : event.summary.value.trim(),
+                            location: regex_location.exec(event.location.value) ? regex_location.exec(event.location.value)[0] : null,
+                            description: event.description.value,
+                            classe: regex_classe.exec(event.description.value) ? regex_classe.exec(event.description.value)[0] : null,
+                            year: year ? year.trim() : null,
+                            teacher: teacher ? teacher.trim() : null,
+                            type: type ? type.trim() : null,
+                            groupe: groupe ? groupe.trim() : null,
+                            classNames: (year ? year.trim() : "") + (type ? type.trim() : "") + (groupe ? groupe.trim() : "") + (regex_summary.exec(event.summary.value) ? regex_summary.exec(event.summary.value)[0] : ""),
+                        })
+                    }
                     return {
                         id: event.uid.value,
                         start: event.dtstart.value,
                         end: event.dtend.value,
-                        summary: regex_summary.exec(event.summary.value) ? regex_summary.exec(event.summary.value)[0] : null,
+                        summary: regex_summary.exec(event.summary.value) ? regex_summary.exec(event.summary.value)[0] : event.summary.value.trim(),
                         location: regex_location.exec(event.location.value) ? regex_location.exec(event.location.value)[0] : null,
                         description: event.description.value,
                         classe: regex_classe.exec(event.description.value) ? regex_classe.exec(event.description.value)[0] : null,
@@ -73,7 +95,8 @@ const make_data_modifs=(r,cache,res,blu,code,send=true)=>{
                 }
             })
         }else{
-            let mindate=Number.MAX_SAFE_INTEGER;let maxdate=Number.MIN_SAFE_INTEGER ;
+            let mindate=Number.MAX_SAFE_INTEGER;
+            let maxdate=Number.MIN_SAFE_INTEGER ;
             data_to_send=data.events.map(event => {
                 try {
                     if(mindate>new Date(event.dtstart.value)){mindate=new Date(event.dtstart.value)}
@@ -196,6 +219,7 @@ const downloader = (code, res, blu = true) => {
     if (currentTime.getMonth() < 7) { YEAR_now = YEAR_now - 1; }
     let data_cached = cache.get(code);
     console.log(code);
+    data_cached=false;
     if (!data_cached) {
         make_data_modifs(fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now + 1}//etudiant/esisar?resources=${code}`,
             // fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}/etudiant/esisar?resources=${code}&startDay=31&startMonth=08&startYear=${YEAR_now-1}&endDay=10&endMonth=01&endYear=${YEAR_now+3}`,
