@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
     res.sendFile("index.html", { root: __dirname });
 });
 api.get("/ics/:code", (req, res) => { // cache 5 minutes cache(5*60*1000)
+    req.params.code=req.params.code.replace('.ics','')
     console.log(req)
     downloaderics(req.params.code, res);
 })
