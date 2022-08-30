@@ -22,13 +22,13 @@ const isThisLocalhost = function (req){
             return req.get('host').indexOf("localhost");
     }
 }
-app.use((req, res, next) => {
-    if (isThisLocalhost(req) && !req.secure) {
-        res.redirect('https://' + req.headers.host + req.url);
-    } else {
-        next();
-    }
-})
+//app.use((req, res, next) => {
+//    if (isThisLocalhost(req) && !req.secure) {
+//        res.redirect('https://' + req.headers.host + req.url);
+//    } else {
+//        next();
+//    }
+//})
 app.get('/', (req, res) => {
     res.sendFile("index.html", { root: __dirname });
 });
