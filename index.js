@@ -23,7 +23,7 @@ const isThisLocalhost = function (req){
     }
 }
 app.use((req, res, next) => {
-    if (isThisLocalhost(req) && !request.secure) {
+    if (isThisLocalhost(req) && !req.secure) {
         res.redirect('https://' + req.headers.host + req.url);
     } else {
         next();
