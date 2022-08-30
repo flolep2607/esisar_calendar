@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<script>var showqr=false;</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,14 +26,13 @@
 </head>
 
 <body>
-    <select id="class-select" onchange="refresh()"></select>
+    <select id="class-select" onchange="refresh();qrcodegen();"></select>
     <a href="" id="ics-link">ICS link</a>
-    <div onclick="qrcodegen()">show QRcode</div> <div id="qrcode"></div>
-    
+    <div onclick="showqr=!showqr;qrcodegen()">show QRcode</div> <div id="qrcode"></div>
     </select>
     <div id='calendar'></div>
 </body>
-<script>
+<script defer>
     let CLASS_CODE = null;
 
     const calendarEl = document.getElementById('calendar');
@@ -94,22 +93,25 @@
             select.innerHTML+=`<option value="salles">SALLES</option>`;
             CLASS_CODE=document.querySelector("#class-select").value;
             calendar.refetchEvents()
-        });
+        }).then(_=>refresh())
     const refresh = _=>{
         CLASS_CODE=document.querySelector("#class-select").value;
         document.querySelector("#ics-link").href=`/api/ics/${CLASS_CODE}`
         calendar.refetchEvents()
     }
     const qrcodegen=_=>{
-        document.getElementById('qrcode').innerHTML="";
-        const qrcode = new QRCode(document.getElementById('qrcode'), {
-            text: 'https://stream.flolep.fr'+document.querySelector("#ics-link").href,
-            width: 128,
-            height: 128,
-            colorDark : '#000',
-            colorLight : '#fff',
-            correctLevel : QRCode.CorrectLevel.H
-        });
+        if(showqr){
+            const CLASS_CODE=document.querySelector("#class-select").value;
+            document.getElementById('qrcode').innerHTML="";
+            const qrcode = new QRCode(document.getElementById('qrcode'), {
+                text: `https://stream.flolep.fr/api/ics/${CLASS_CODE}`,
+                width: 128,
+                height: 128,
+                colorDark : '#000',
+                colorLight : '#fff',
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
     }
 </script>
 
