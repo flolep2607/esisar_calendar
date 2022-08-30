@@ -78,12 +78,16 @@
         }
     });
     calendar.render();
+    const CURRENT_MONTH=(new Date).getMonth();
     fetch("/api/classes")
         .then(r=>r.json())
         .then(json=>{
             const select=document.querySelector("#class-select");
             json.forEach(classe => {
-                if(!classe.classe.includes('S1')){
+                console.log(CURRENT_MONTH,classe.classe.includes('S1'),classe.classe);
+                if(CURRENT_MONTH<=6 && !classe.classe.includes('S1')){
+                    select.innerHTML+=`<option value="${classe.code}">${classe.classe}</option>`;
+                }else if(CURRENT_MONTH>6 && !classe.classe.includes('S2')){
                     select.innerHTML+=`<option value="${classe.code}">${classe.classe}</option>`;
                 }
             });
