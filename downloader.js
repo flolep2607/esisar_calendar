@@ -3,6 +3,7 @@ Date.prototype.addDays = function(days) {
     date.setDate(date.getDate() + days);
     return date;
 }
+const CACHE_TIME = 10 * 60 * 1000;
 const fs = require("fs");
 const cache = require('memory-cache');
 const fetch = require("node-fetch");
@@ -186,7 +187,7 @@ const make_data_modifs=(r,cache,res,blu,code,send=true)=>{
         //salles=[...new Set(data_to_send.filter(r=>r.type && (r.type.includes("TD") || r.type.includes("CM"))).map(r=>r.location).filter(t=>t!==null))]
         //console.log(salles);
         if(send){res.json(data_to_send);}
-        cache.put(code, data_to_send, 5 * 60 * 1000);//5minutes
+        cache.put(code, data_to_send, CACHE_TIME);//5minutes
     })
 }
 const downloader = (code, res,blu=true) => {
@@ -390,7 +391,7 @@ const downloader = (code, res,blu=true) => {
             //     //salles=[...new Set(data_to_send.filter(r=>r.type && (r.type.includes("TD") || r.type.includes("CM"))).map(r=>r.location).filter(t=>t!==null))]
             //     //console.log(salles);
             //     res.json(data_to_send);
-            //     cache.put(code, data_to_send, 5 * 60 * 1000);//5minutes
+            //     cache.put(code, data_to_send, CACHE_TIME);//5minutes
             // })
         } else {
             res.json(data_cached);

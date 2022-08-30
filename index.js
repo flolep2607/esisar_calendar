@@ -7,9 +7,9 @@ const {
     downloaderics,
     downloader
 } = require("./downloader.js");
-let cache = apicache.options({
-    enabled: true
-}).middleware
+// let cache = apicache.options({
+//     enabled: true
+// }).middleware
 
 const SALLES = "9756,2432,2101,2895,2336,1814,1660,2706,2295,3098,3096,9757,15186,1796,1797,2543";
 const isThisLocalhost = function (req){
@@ -32,7 +32,6 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.sendFile("index.html", { root: __dirname });
 });
-api.use(cache('5 minutes'))
 api.get("/ics/:code", (req, res) => { // cache 5 minutes cache(5*60*1000)
     downloaderics(req.params.code, res);
 })
@@ -70,3 +69,4 @@ app.use('/api', api);
 app.listen(process.env.PORT || 8080, () => {
     console.log(`http://localhost:${process.env.PORT || 8080}`)
 });
+
