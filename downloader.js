@@ -55,24 +55,6 @@ const make_data_modifs=(r,cache,res,blu,code,send=true)=>{
                     if(!parsed.groups.matiere && regex_matiere_spec.exec(event.summary.value)){
                         parsed.groups.matiere=regex_matiere_spec.exec(event.summary.value)[0]
                     }
-                    if(!parsed.groups.matiere){
-                    // if(!regex_location.exec(event.description.value)){
-                        console.log(event)
-                        console.log({
-                            id: event.uid.value,
-                            start: event.dtstart.value,
-                            end: event.dtend.value,
-                            summary: regex_summary.exec(event.summary.value) ? regex_summary.exec(event.summary.value)[0] : event.summary.value.trim(),
-                            location: regex_location.exec(event.location.value) ? regex_location.exec(event.location.value)[0] : null,
-                            description: event.description.value,
-                            classe: regex_classe.exec(event.description.value) ? regex_classe.exec(event.description.value)[0] : null,
-                            year: year ? year.trim() : null,
-                            teacher: teacher ? teacher.trim() : null,
-                            type: type ? type.trim() : null,
-                            groupe: groupe ? groupe.trim() : null,
-                            classNames: (year ? year.trim() : "") + (type ? type.trim() : "") + (groupe ? groupe.trim() : "") + (regex_summary.exec(event.summary.value) ? regex_summary.exec(event.summary.value)[0] : ""),
-                        })
-                    }
                     return {
                         id: event.uid.value,
                         start: event.dtstart.value,
@@ -219,7 +201,6 @@ const downloader = (code, res, blu = true) => {
     if (currentTime.getMonth() < 7) { YEAR_now = YEAR_now - 1; }
     let data_cached = cache.get(code);
     console.log(code);
-    data_cached=false;
     if (!data_cached) {
         make_data_modifs(fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now + 1}//etudiant/esisar?resources=${code}`,
             // fetch(`https://edt.grenoble-inp.fr/directCal/${YEAR_now}-${YEAR_now+1}/etudiant/esisar?resources=${code}&startDay=31&startMonth=08&startYear=${YEAR_now-1}&endDay=10&endMonth=01&endYear=${YEAR_now+3}`,
